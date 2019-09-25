@@ -9,12 +9,14 @@
 
 char ADCState = 0; //Busy state of the ADC
 int16_t ADCResult = 0; //Storage for the ADC conversion result
+int echo_pulse_duration;
+int distance_cm;
 
 void main(void)
 {
-    char buttonState = 0; //Current button press state (to allow edge detection)
+    char buttonState = 1; //Current button press state (to allow edge detection)
 
-     * Functions with two underscores in front are called compiler intrinsics.
+     /* Functions with two underscores in front are called compiler intrinsics.
      * They are documented in the compiler user guide, not the IDE or MCU guides.
      * They are a shortcut to insert some assembly code that is not really
      * expressible in plain C/C++. Google "MSP430 Optimizing C/C++ Compiler
@@ -49,43 +51,97 @@ void main(void)
     //All done initializations - turn interrupts back on.
     __enable_interrupt();
 
-    displayScrollText("ECE 298");
+    displayScrollText("PROJECT 1");
+
+    showChar('L', pos1);
+    showChar('E', pos2);
+    showChar('D', pos3);
+    showChar('S', pos4);
+
+    int x;
+    for (x = 0; x < 4; x++) {
+        GPIO_setOutputHighOnPin(LED_PORT, LED_PIN);
+        _delay_cycles(200000);
+        GPIO_setOutputLowOnPin(LED_PORT, LED_PIN);
+        if (x != 3) {
+            _delay_cycles(200000);
+        }
+    }
+
+    showChar('S', pos1);
+    showChar('O', pos2);
+    showChar('U', pos3);
+    showChar('N', pos4);
+    showChar('D', pos5);
 
     while(1) //Do this when you want an infinite loop of code
     {
         //Buttons SW1 and SW2 are active low (1 until pressed, then 0)
-        if ((GPIO_getInputPinValue(SW1_PORT, SW1_PIN) == 1) & (buttonState == 0)) //Look for rising edge
+        if ((GPIO_getInputPinValue(SW2_PORT, SW2_PIN) == 0) & (buttonState == 0)) //Look for rising edge
         {
             Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
             buttonState = 1;                //Capture new button state
+            break;
         }
         if ((GPIO_getInputPinValue(SW1_PORT, SW1_PIN) == 0) & (buttonState == 1)) //Look for falling edge
         {
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
             buttonState = 0;                            //Capture new button state
         }
-
         //Start an ADC conversion (if it's not busy) in Single-Channel, Single Conversion Mode
-        if (ADCState == 0)
+        /*if (ADCState == 0)
         {
             showHex((int)ADCResult); //Put the previous result on the LCD display
             ADCState = 1; //Set flag to indicate ADC is busy - ADC ISR (interrupt) will clear it
             ADC_startConversion(ADC_BASE, ADC_SINGLECHANNEL);
-        }
-
-
+        }*/
     }
 
-    /*
-     * You can use the following code if you plan on only using interrupts
-     * to handle all your system events since you don't need any infinite loop of code.
-     *
-     * //Enter LPM0 - interrupts only
-     * __bis_SR_register(LPM0_bits);
-     * //For debugger to let it know that you meant for there to be no more code
-     * __no_operation();
-    */
+    displayScrollText("Sensor");
 
+    param2.clockSource           = TIMER_A_CLOCKSOURCE_SMCLK;
+    param2.clockSourceDivider    = TIMER_A_CLOCKSOURCE_DIVIDER_1;
+    param2.timerInterruptEnable_TAIE = TIMER_A_TAIE_INTERRUPT_DISABLE;
+    param2.timerClear = TIMER_A_SKIP_CLEAR;
+    param2.startTimer = true;
+
+    param3.captureRegister = TIMER_A_CAPTURECOMPARE_REGISTER_2;
+    param3.captureMode = TIMER_A_CAPTUREMODE_RISING_AND_FALLING_EDGE;
+    param3.captureInputSelect = TIMER_A_CAPTURE_INPUTSELECT_CCIxA;
+    param3.synchronizeCaptureSource = TIMER_A_CAPTURE_SYNCHRONOUS;
+    param3.captureInterruptEnable = TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE;
+    param3.captureOutputMode = TIMER_A_OUTPUTMODE_OUTBITVALUE;
+
+    Timer_A_initContinuousMode (TIMER_A1_BASE, &param2);
+
+    while(1)
+    {
+        Timer_A_clear(TIMER_A1_BASE);
+
+        //send a trigger pulse of 10 us
+        GPIO_setOutputHighOnPin(DSO_PORT, DSO_PIN);
+        //Timer_A_outputPWM(TIMER_A0_BASE, &param);
+
+        __delay_cycles(1); //want 10 microsecond
+
+        GPIO_setOutputLowOnPin(DSO_PORT, DSO_PIN);
+
+        while(GPIO_getInputPinValue(DSI_PORT, DSI_PIN) == 0){}
+
+        Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_CONTINUOUS_MODE);
+
+        while(GPIO_getInputPinValue(DSI_PORT, DSI_PIN) == 1){}
+
+        Timer_A_stop(TIMER_A1_BASE);
+
+        echo_pulse_duration = Timer_A_getCounterValue(TIMER_A1_BASE);
+
+        distance_cm = echo_pulse_duration/58;
+
+        showHex((int)distance_cm);
+
+        __delay_cycles(17650);
+    }
 }
 
 void Init_GPIO(void)
@@ -117,8 +173,12 @@ void Init_GPIO(void)
     //GPIO_setAsOutputPin(LED1_PORT, LED1_PIN); //Comment if using UART
     GPIO_setAsOutputPin(LED2_PORT, LED2_PIN);
 
-    GPIO_setAsOutputPin(DSO_PORT, DSO_PIN);
+    //Set Speaker input and output
+    GPIO_setAsOutputPin(LED_PORT, LED_PIN);
+
+    //Sensor
     GPIO_setAsInputPin(DSI_PORT, DSI_PIN);
+    GPIO_setAsOutputPin(DSO_PORT, DSO_PIN);
 }
 
 /* Clock System Initialization */
