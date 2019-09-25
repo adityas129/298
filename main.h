@@ -3,8 +3,8 @@
 
 #include "driverlib/driverlib.h"
 
-#define TIMER_A_PERIOD  1000 //T = 1/f = (TIMER_A_PERIOD * 1 us)
-#define HIGH_COUNT      500  //Number of cycles signal is high (Duty Cycle = HIGH_COUNT / TIMER_A_PERIOD)
+#define TIMER_A_PERIOD  100 //T = 1/f = (TIMER_A_PERIOD * 1 us)
+#define HIGH_COUNT      12  //Number of cycles signal is high (Duty Cycle = HIGH_COUNT / TIMER_A_PERIOD)
 
 //Output pin to buzzer
 #define PWM_PORT        GPIO_PORT_P1
@@ -26,17 +26,27 @@
 #define ADC_IN_PIN      GPIO_PIN1
 #define ADC_IN_CHANNEL  ADC_INPUT_A9
 
-//Distance Sensor
+//Define Speaker
+#define LED_PORT     GPIO_PORT_P1
+#define LED_PIN      GPIO_PIN6
+
+//Sensor
 #define DSO_PORT         GPIO_PORT_P2
-#define DSO_PIN          GPIO_PIN7
-#define DSI_PORT         GPIO_PORT_P2
-#define DSI_PIN          GPIO_PIN5
+#define DSO_PIN          GPIO_PIN5
+#define DSI_PORT         GPIO_PORT_P1
+#define DSI_PIN          GPIO_PIN3
 
 void Init_GPIO(void);
 void Init_Clock(void);
 void Init_UART(void);
 void Init_PWM(void);
 void Init_ADC(void);
+
+Timer_A_outputPWMParam param; //Timer configuration data structure for PWM
+Timer_A_initContinuousModeParam param2; //Timer configuration data structure for continuous mode
+Timer_A_initCaptureModeParam param3; //Timer configuration data structure for continuous mode
+
+//Timer_A_initCaptureMode param3;
 
 Timer_A_outputPWMParam param; //Timer configuration data structure for PWM
 
