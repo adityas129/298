@@ -1,6 +1,8 @@
 #include "main.h"
 #include "driverlib/driverlib.h"
 #include "hal_LCD.h"
+#include <string.h>
+#include <stdio.h>
 
 /*
  * This project contains some code samples that may be useful.
@@ -97,7 +99,7 @@ void main(void)
         }*/
     }
 
-    displayScrollText("Sensor");
+    displayScrollText("SENSOR");
 
     param2.clockSource           = TIMER_A_CLOCKSOURCE_SMCLK;
     param2.clockSourceDivider    = TIMER_A_CLOCKSOURCE_DIVIDER_1;
@@ -138,9 +140,18 @@ void main(void)
 
         distance_cm = echo_pulse_duration/58;
 
-        showHex((int)distance_cm);
+        char x[15] = {0};
 
-        __delay_cycles(17650);
+        sprintf(x, "%d", distance_cm);
+
+//        displayScrollText(x);
+//        showHex((int)distance_cm);
+        showChar(x[0], pos6);
+        showChar(x[1], pos5);
+        showChar(x[2], pos4);
+        showChar(x[3], pos3);
+
+        __delay_cycles(170000);
     }
 }
 
