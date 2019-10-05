@@ -31,10 +31,10 @@
 #define LED_PIN      GPIO_PIN6
 
 //Sensor
-#define DSO_PORT         GPIO_PORT_P2
+#define DSO_PORT         GPIO_PORT_P1
 #define DSO_PIN          GPIO_PIN5
 #define DSI_PORT         GPIO_PORT_P1
-#define DSI_PIN          GPIO_PIN3
+#define DSI_PIN          GPIO_PIN4
 
 void Init_GPIO(void);
 void Init_Clock(void);
