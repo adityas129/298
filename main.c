@@ -26,11 +26,11 @@ int enttwo = 0;
 int entthree = 0;
 int entfour = 0;
 
-int FT_ONE = 100;
-int FT_TWO = 50;
-int BT_ONE = 200;
-int BT_TWO = 100;
-int BT_THREE = 50;
+int FT_ONE = 200;
+int FT_TWO = 100;
+int BT_ONE = 300;
+int BT_TWO = 200;
+int BT_THREE = 100;
 
 void main(void) {
     __disable_interrupt();
@@ -261,14 +261,14 @@ void main(void) {
 //        }
 //
 //        if (FT_TWO >= FT_ONE) {
-//            FT_ONE = 100;
-//            FT_TWO = 50;
+//            FT_ONE = 200;
+//            FT_TWO = 100;
 //        }
 //
 //        if (BT_THREE >= BT_TWO || BT_TWO >= BT_ONE || BT_THREE >= BT_ONE) {
 //            BT_ONE = 300;
 //            BT_TWO = 200;
-//            BT_ONE = 10;
+//            BT_ONE = 100;
 //        }
     }
 
@@ -334,7 +334,7 @@ void main(void) {
 
         if (count == 3) {
             i = 0;
-            number = (distance_cm[0]+distance_cm[1]+distance_cm[2])/3;
+            number = (distance_cm[0]+(4*distance_cm[1])+distance_cm[2])/6;
             average = number;
             while (number != 0) {
                 x[i] = number % 10;
@@ -345,12 +345,22 @@ void main(void) {
 
         if(ForB == 0) {
             showChar('F', pos1);
-            showChar(x[0]+48, pos6);
-            showChar(x[1]+48, pos5);
-            showChar(x[2]+48, pos4);
+            if (average < 10) {
+                showChar(x[0]+48, pos6);
+                showChar('0', pos5);
+                showChar('0', pos4);
+            } else if (average < 100) {
+                showChar(x[0]+48, pos6);
+                showChar(x[1]+48, pos5);
+                showChar('0', pos4);
+            } else {
+                showChar(x[0]+48, pos6);
+                showChar(x[1]+48, pos5);
+                showChar(x[2]+48, pos4);
+            }
         }
 
-        if (average < FT_TWO) {
+        if (average <= FT_TWO) {
             Init_PWM2(200, 100); //Set period and high count
 
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
@@ -371,7 +381,7 @@ void main(void) {
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
             _delay_cycles(100000);
             Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-        } else if (average < FT_ONE) {
+        } else if (average <= FT_ONE) {
             Init_PWM2(300, 150); //Set period and high count
 
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
@@ -421,7 +431,7 @@ void main(void) {
 
         if (count == 3) {
             i = 0;
-            number = (distance_cmb[0]+distance_cmb[1]+distance_cmb[2])/3;
+            number = (distance_cmb[0]+(4*distance_cmb[1])+distance_cmb[2])/6;
             average = number;
             while (number != 0) {
                 x[i] = number % 10;
@@ -432,22 +442,32 @@ void main(void) {
 
         if(ForB == 1) {
             showChar('B', pos1);
-            showChar(x[0]+48, pos6);
-            showChar(x[1]+48, pos5);
-            showChar(x[2]+48, pos4);
+            if (average < 10) {
+                showChar(x[0]+48, pos6);
+                showChar('0', pos5);
+                showChar('0', pos4);
+            } else if (average < 100) {
+                showChar(x[0]+48, pos6);
+                showChar(x[1]+48, pos5);
+                showChar('0', pos4);
+            } else {
+                showChar(x[0]+48, pos6);
+                showChar(x[1]+48, pos5);
+                showChar(x[2]+48, pos4);
+            }
         }
 
-        if (average < BT_THREE) {
+        if (average <= BT_THREE) {
             GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
             GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
             GPIO_setOutputHighOnPin(RED_PORT, RED_PIN);
-        } else if (average < BT_TWO) {
+        } else if (average <= BT_TWO) {
             GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
             GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputHighOnPin(ORANGE_PORT, ORANGE_PIN);
             GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
-        } else if (average < BT_ONE) {
+        } else if (average <= BT_ONE) {
             GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
             GPIO_setOutputHighOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
