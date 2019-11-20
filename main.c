@@ -12,8 +12,8 @@
 char ADCState = 0; //Busy state of the ADC
 int16_t ADCResult = 0; //Storage for the ADC conversion result
 int echo_pulse_duration = 0;
-int distance_cm = 0;
-int distance_cmb = 0;
+int distance_cm[3] = {0};
+int distance_cmb[3] = {0};
 
 int mode = 0;
 int ForB = 0;
@@ -272,7 +272,7 @@ void main(void) {
 //        }
     }
 
-    displayScrollText("SENSOR");
+    displayScrollText("USER MODE");
 
     param2.clockSource           = TIMER_A_CLOCKSOURCE_SMCLK;
     param2.clockSourceDivider    = TIMER_A_CLOCKSOURCE_DIVIDER_1;
@@ -287,6 +287,13 @@ void main(void) {
     param3.captureInterruptEnable = TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE;
     param3.captureOutputMode = TIMER_A_OUTPUTMODE_OUTBITVALUE;
 
+    int bcount = 0;
+    int fcount = 0;
+    int count = 0;
+    int number = 400;
+    int average = 400;
+    int i = 0;
+    char x[3] = {0};
     mode = 1;
     Timer_A_initContinuousMode(TIMER_A1_BASE, &param2);
     while(1) {
@@ -317,22 +324,23 @@ void main(void) {
 
         echo_pulse_duration = Timer_A_getCounterValue(TIMER_A1_BASE);
 
-        distance_cm = echo_pulse_duration/58;
+        distance_cm[fcount] = echo_pulse_duration/58;
 
-        char x[15] = {0};
-
-        if (distance_cm < 3) {
-            distance_cm = 3;
-        } else if (distance_cm > 400) {
-            distance_cm = 400;
+        if (distance_cm[fcount] < 3) {
+            distance_cm[fcount] = 3;
+        } else if (distance_cm[fcount] > 400) {
+            distance_cm[fcount] = 400;
         }
 
-        int i = 0;
-        int number = distance_cm;
-        while (number != 0) {
-            x[i] = number % 10;
-            number /= 10;
-            i++;
+        if (count == 3) {
+            i = 0;
+            number = (distance_cm[0]+distance_cm[1]+distance_cm[2])/3;
+            average = number;
+            while (number != 0) {
+                x[i] = number % 10;
+                number /= 10;
+                i++;
+            }
         }
 
         if(ForB == 0) {
@@ -342,7 +350,7 @@ void main(void) {
             showChar(x[2]+48, pos4);
         }
 
-        if (distance_cm < FT_TWO) {
+        if (average < FT_TWO) {
             Init_PWM2(200, 100); //Set period and high count
 
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
@@ -363,7 +371,7 @@ void main(void) {
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
             _delay_cycles(100000);
             Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-        } else if (distance_cm < FT_ONE) {
+        } else if (average < FT_ONE) {
             Init_PWM2(300, 150); //Set period and high count
 
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
@@ -376,6 +384,11 @@ void main(void) {
             Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
         }
         __delay_cycles(170000);
+
+        fcount++;
+        if (fcount > 2) {
+            fcount = 0;
+        }
 
         Timer_A_clear(TIMER_A1_BASE);
 
@@ -398,20 +411,23 @@ void main(void) {
 
         echo_pulse_duration = Timer_A_getCounterValue(TIMER_A1_BASE);
 
-        distance_cmb = echo_pulse_duration/58;
+        distance_cmb[bcount] = echo_pulse_duration/58;
 
-        if (distance_cmb < 3) {
-            distance_cmb = 3;
-        } else if (distance_cmb > 400) {
-            distance_cmb = 400;
+        if (distance_cmb[bcount] < 3) {
+            distance_cmb[bcount] = 3;
+        } else if (distance_cmb[bcount] > 400) {
+            distance_cmb[bcount] = 400;
         }
 
-        i = 0;
-        number = distance_cmb;
-        while (number != 0) {
-            x[i] = number % 10;
-            number /= 10;
-            i++;
+        if (count == 3) {
+            i = 0;
+            number = (distance_cmb[0]+distance_cmb[1]+distance_cmb[2])/3;
+            average = number;
+            while (number != 0) {
+                x[i] = number % 10;
+                number /= 10;
+                i++;
+            }
         }
 
         if(ForB == 1) {
@@ -421,17 +437,17 @@ void main(void) {
             showChar(x[2]+48, pos4);
         }
 
-        if (distance_cmb < BT_THREE) {
+        if (average < BT_THREE) {
             GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
             GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
             GPIO_setOutputHighOnPin(RED_PORT, RED_PIN);
-        } else if (distance_cmb < BT_TWO) {
+        } else if (average < BT_TWO) {
             GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
             GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputHighOnPin(ORANGE_PORT, ORANGE_PIN);
             GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
-        } else if (distance_cmb < BT_ONE) {
+        } else if (average < BT_ONE) {
             GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
             GPIO_setOutputHighOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
@@ -441,6 +457,15 @@ void main(void) {
             GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
             GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
             GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
+        }
+
+        bcount++;
+        if (bcount > 2) {
+            bcount = 0;
+        }
+
+        if (count < 3) {
+            count++;
         }
 
 //        __delay_cycles(170000);
