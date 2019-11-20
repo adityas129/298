@@ -26,11 +26,11 @@ int enttwo = 0;
 int entthree = 0;
 int entfour = 0;
 
-int FT_ONE = 200;
-int FT_TWO = 100;
-int FT_THREE = 50;
-int BT_ONE = 100;
-int BT_TWO = 50;
+int FT_ONE = 100;
+int FT_TWO = 50;
+int BT_ONE = 300;
+int BT_TWO = 200;
+int BT_THREE = 100;
 
 void main(void) {
     __disable_interrupt();
@@ -68,118 +68,209 @@ void main(void) {
      */
     PMM_unlockLPM5(); //Disable the GPIO power-on default high-impedance mode to activate previously configured port settings
 
+    //LED TEST
+//    while (1) {
+//        GPIO_setOutputHighOnPin(GREEN_PORT, GREEN_PIN);
+//        GPIO_setOutputHighOnPin(YELLOW_PORT, YELLOW_PIN);
+//        GPIO_setOutputHighOnPin(ORANGE_PORT, ORANGE_PIN);
+//        GPIO_setOutputHighOnPin(RED_PORT, RED_PIN);
+//    }
+
+    //SOUND TEST
+//    while (1) {
+//        if (GPIO_getInputPinValue(SW1_PORT, SW1_PIN) == 0) {
+//                    Init_PWM2(200, 100); //Set period and high count
+//
+//                    Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+//                    _delay_cycles(100000);
+//                    Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+//
+//                    _delay_cycles(100000);
+//                    Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+//                    _delay_cycles(100000);
+//                    Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+//
+//                    _delay_cycles(100000);
+//                    Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+//                    _delay_cycles(100000);
+//                    Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+//
+//                    _delay_cycles(100000);
+//                    Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+//                    _delay_cycles(100000);
+//                    Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+//                } else if (GPIO_getInputPinValue(SW2_PORT, SW2_PIN) == 0) {
+//                    Init_PWM2(300, 150); //Set period and high count
+//
+//                    Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+//                    _delay_cycles(200000);
+//                    Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+//
+//                    _delay_cycles(200000);
+//                    Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+//                    _delay_cycles(200000);
+//                    Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+//                }
+//    }
+
     __enable_interrupt();
 
     Setup:
-//    {
-//        displayScrollText("SETUP MODE");
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET FT1");
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        FT_ONE = digone + digtwo*10 + digthree*100;
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET FT2");
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        FT_TWO = digone + digtwo*10 + digthree*100;
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET FT3");
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        FT_THREE = digone + digtwo*10 + digthree*100;
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET BT1");
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        BT_ONE = digone + digtwo*10 + digthree*100;
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET BT2");
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        BT_TWO = digone + digtwo*10 + digthree*100;
-//    }
+    {
+        displayScrollText("SETUP MODE");
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET FT1");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        FT_ONE = digone + digtwo*10 + digthree*100;
+
+        if (FT_ONE < 3) {
+            FT_ONE = 3;
+        } else if (FT_ONE > 400) {
+            FT_ONE = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET FT2");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        FT_TWO = digone + digtwo*10 + digthree*100;
+
+        if (FT_TWO < 3) {
+            FT_TWO = 3;
+        } else if (FT_TWO > 400) {
+            FT_TWO = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET BT1");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        BT_ONE = digone + digtwo*10 + digthree*100;
+
+        if (BT_ONE < 3) {
+            BT_ONE = 3;
+        } else if (BT_ONE > 400) {
+            BT_ONE = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET BT2");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        BT_TWO = digone + digtwo*10 + digthree*100;
+
+        if (BT_TWO < 3) {
+            BT_TWO = 3;
+        } else if (BT_TWO > 400) {
+            BT_TWO = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET BT3");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        BT_THREE = digone + digtwo*10 + digthree*100;
+
+        if (BT_THREE < 3) {
+            BT_THREE = 3;
+        } else if (BT_THREE > 400) {
+            BT_THREE = 400;
+        }
+
+        if (FT_TWO >= FT_ONE) {
+            FT_ONE = 100;
+            FT_TWO = 50;
+        }
+
+        if (BT_THREE >= BT_TWO || BT_TWO >= BT_ONE || BT_THREE >= BT_ONE) {
+            BT_ONE = 300;
+            BT_TWO = 200;
+            BT_ONE = 10;
+        }
+    }
 
     displayScrollText("SENSOR");
 
@@ -196,14 +287,14 @@ void main(void) {
     param3.captureInterruptEnable = TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE;
     param3.captureOutputMode = TIMER_A_OUTPUTMODE_OUTBITVALUE;
 
-    Timer_A_initContinuousMode (TIMER_A1_BASE, &param2);
     mode = 1;
+    Timer_A_initContinuousMode(TIMER_A1_BASE, &param2);
     while(1) {
 //        displayScrollText("START");
-//        if (!mode) {
+        if (!mode) {
 //            displayScrollText("LEAVE");
-//            goto Setup;
-//        }
+            goto Setup;
+        }
         Timer_A_clear(TIMER_A1_BASE);
 //
 //        //send a trigger pulse of 10 us
@@ -214,11 +305,9 @@ void main(void) {
 
         GPIO_setOutputLowOnPin(DSO_PORT, DSO_PIN);
 
-//        showChar('1', pos1);
-
         while(GPIO_getInputPinValue(DSI_PORT, DSI_PIN) == 0){}
 
-        showChar('1', pos2);
+//        showChar('1', pos2);
 
         Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_CONTINUOUS_MODE);
 
@@ -243,6 +332,7 @@ void main(void) {
         if(ForB == 0) {
             showChar('F', pos1);
 
+//            displayScrollText(x);
             if (distance_cm < 10) {
                 showChar(x[0]+48, pos6);
             } else if (distance_cm < 100) {
@@ -255,26 +345,38 @@ void main(void) {
             }
         }
 
-        if (distance_cm < FT_THREE) {
-            GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
-            GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
-            GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
-            GPIO_setOutputHighOnPin(RED_PORT, RED_PIN);
-        } else if (distance_cm < FT_TWO) {
-            GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
-            GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
-            GPIO_setOutputHighOnPin(YELLOW_PORT, YELLOW_PIN);
-            GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
+        if (distance_cm < FT_TWO) {
+            Init_PWM2(200, 100); //Set period and high count
+
+            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+            _delay_cycles(100000);
+            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+
+            _delay_cycles(100000);
+            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+            _delay_cycles(100000);
+            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+
+            _delay_cycles(100000);
+            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+            _delay_cycles(100000);
+            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+
+            _delay_cycles(100000);
+            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+            _delay_cycles(100000);
+            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
         } else if (distance_cm < FT_ONE) {
-            GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
-            GPIO_setOutputHighOnPin(ORANGE_PORT, ORANGE_PIN);
-            GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
-            GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
-        } else {
-            GPIO_setOutputHighOnPin(GREEN_PORT, GREEN_PIN);
-            GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
-            GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
-            GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
+            Init_PWM2(300, 150); //Set period and high count
+
+            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+            _delay_cycles(200000);
+            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+
+            _delay_cycles(200000);
+            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
+            _delay_cycles(200000);
+            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
         }
         __delay_cycles(170000);
 
@@ -287,11 +389,9 @@ void main(void) {
 
         GPIO_setOutputLowOnPin(DSOB_PORT, DSOB_PIN);
 
-//        showChar('3', pos3);
-
         while(GPIO_getInputPinValue(DSIB_PORT, DSIB_PIN) == 0){}
 
-        showChar('2', pos3);
+//        showChar('2', pos3);
 
         Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_CONTINUOUS_MODE);
 
@@ -314,6 +414,7 @@ void main(void) {
         if(ForB == 1) {
             showChar('B', pos1);
 
+//            displayScrollText(x);
             if (distance_cmb < 10) {
                 showChar(x[0]+48, pos6);
             } else if (distance_cmb < 100) {
@@ -326,45 +427,33 @@ void main(void) {
             }
         }
 
-        if (distance_cmb < BT_TWO) {
-            Init_PWM2(200, 100); //Set period and high count
-
-            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
-            _delay_cycles(100000);
-            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-
-            _delay_cycles(100000);
-            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
-            _delay_cycles(100000);
-            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-
-            _delay_cycles(100000);
-            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
-            _delay_cycles(100000);
-            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-
-            _delay_cycles(100000);
-            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
-            _delay_cycles(100000);
-            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+        if (distance_cmb < BT_THREE) {
+            GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
+            GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
+            GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
+            GPIO_setOutputHighOnPin(RED_PORT, RED_PIN);
+        } else if (distance_cmb < BT_TWO) {
+            GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
+            GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
+            GPIO_setOutputHighOnPin(ORANGE_PORT, ORANGE_PIN);
+            GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
         } else if (distance_cmb < BT_ONE) {
-            Init_PWM2(300, 150); //Set period and high count
-
-            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
-            _delay_cycles(200000);
-            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-
-            _delay_cycles(200000);
-            Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
-            _delay_cycles(200000);
-            Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+            GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
+            GPIO_setOutputHighOnPin(YELLOW_PORT, YELLOW_PIN);
+            GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
+            GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
+        } else {
+            GPIO_setOutputHighOnPin(GREEN_PORT, GREEN_PIN);
+            GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
+            GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
+            GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
         }
 
-        __delay_cycles(170000);
-        showChar('0', pos1);
-        showChar('0', pos2);
-        showChar('0', pos3);
-        showChar('0', pos4);
+//        __delay_cycles(170000);
+//        showChar('0', pos1);
+//        showChar('0', pos2);
+//        showChar('0', pos3);
+//        showChar('0', pos4);
     }
 }
 
