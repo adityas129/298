@@ -28,9 +28,9 @@ int entfour = 0;
 
 int FT_ONE = 100;
 int FT_TWO = 50;
-int BT_ONE = 300;
-int BT_TWO = 200;
-int BT_THREE = 100;
+int BT_ONE = 200;
+int BT_TWO = 100;
+int BT_THREE = 50;
 
 void main(void) {
     __disable_interrupt();
@@ -117,159 +117,159 @@ void main(void) {
 
     Setup:
     {
-        displayScrollText("SETUP MODE");
-
-        while (!mode) {
-            if (entone == 0) {
-                displayScrollText("SET FT1");
-                entone = 1;
-            } else if (enttwo == 0) {
-                showChar(digone+48, pos6);
-            } else if (entthree == 0) {
-                showChar(digtwo+48, pos5);
-            } else if (entfour == 0) {
-                showChar(digthree+48, pos4);
-            }
-        }
-
-        FT_ONE = digone + digtwo*10 + digthree*100;
-
-        if (FT_ONE < 3) {
-            FT_ONE = 3;
-        } else if (FT_ONE > 400) {
-            FT_ONE = 400;
-        }
-
-        mode = 0;
-        digone = 0;
-        digtwo = 0;
-        digthree = 0;
-        entone = 0;
-        enttwo = 0;
-        entthree = 0;
-        entfour = 0;
-
-        while (!mode) {
-            if (entone == 0) {
-                displayScrollText("SET FT2");
-                entone = 1;
-            } else if (enttwo == 0) {
-                showChar(digone+48, pos6);
-            } else if (entthree == 0) {
-                showChar(digtwo+48, pos5);
-            } else if (entfour == 0) {
-                showChar(digthree+48, pos4);
-            }
-        }
-
-        FT_TWO = digone + digtwo*10 + digthree*100;
-
-        if (FT_TWO < 3) {
-            FT_TWO = 3;
-        } else if (FT_TWO > 400) {
-            FT_TWO = 400;
-        }
-
-        mode = 0;
-        digone = 0;
-        digtwo = 0;
-        digthree = 0;
-        entone = 0;
-        enttwo = 0;
-        entthree = 0;
-        entfour = 0;
-
-        while (!mode) {
-            if (entone == 0) {
-                displayScrollText("SET BT1");
-                entone = 1;
-            } else if (enttwo == 0) {
-                showChar(digone+48, pos6);
-            } else if (entthree == 0) {
-                showChar(digtwo+48, pos5);
-            } else if (entfour == 0) {
-                showChar(digthree+48, pos4);
-            }
-        }
-
-        BT_ONE = digone + digtwo*10 + digthree*100;
-
-        if (BT_ONE < 3) {
-            BT_ONE = 3;
-        } else if (BT_ONE > 400) {
-            BT_ONE = 400;
-        }
-
-        mode = 0;
-        digone = 0;
-        digtwo = 0;
-        digthree = 0;
-        entone = 0;
-        enttwo = 0;
-        entthree = 0;
-        entfour = 0;
-
-        while (!mode) {
-            if (entone == 0) {
-                displayScrollText("SET BT2");
-                entone = 1;
-            } else if (enttwo == 0) {
-                showChar(digone+48, pos6);
-            } else if (entthree == 0) {
-                showChar(digtwo+48, pos5);
-            } else if (entfour == 0) {
-                showChar(digthree+48, pos4);
-            }
-        }
-
-        BT_TWO = digone + digtwo*10 + digthree*100;
-
-        if (BT_TWO < 3) {
-            BT_TWO = 3;
-        } else if (BT_TWO > 400) {
-            BT_TWO = 400;
-        }
-
-        mode = 0;
-        digone = 0;
-        digtwo = 0;
-        digthree = 0;
-        entone = 0;
-        enttwo = 0;
-        entthree = 0;
-        entfour = 0;
-
-        while (!mode) {
-            if (entone == 0) {
-                displayScrollText("SET BT3");
-                entone = 1;
-            } else if (enttwo == 0) {
-                showChar(digone+48, pos6);
-            } else if (entthree == 0) {
-                showChar(digtwo+48, pos5);
-            } else if (entfour == 0) {
-                showChar(digthree+48, pos4);
-            }
-        }
-
-        BT_THREE = digone + digtwo*10 + digthree*100;
-
-        if (BT_THREE < 3) {
-            BT_THREE = 3;
-        } else if (BT_THREE > 400) {
-            BT_THREE = 400;
-        }
-
-        if (FT_TWO >= FT_ONE) {
-            FT_ONE = 100;
-            FT_TWO = 50;
-        }
-
-        if (BT_THREE >= BT_TWO || BT_TWO >= BT_ONE || BT_THREE >= BT_ONE) {
-            BT_ONE = 300;
-            BT_TWO = 200;
-            BT_ONE = 10;
-        }
+//        displayScrollText("SETUP MODE");
+//
+//        while (!mode) {
+//            if (entone == 0) {
+//                displayScrollText("SET FT1");
+//                entone = 1;
+//            } else if (enttwo == 0) {
+//                showChar(digone+48, pos6);
+//            } else if (entthree == 0) {
+//                showChar(digtwo+48, pos5);
+//            } else if (entfour == 0) {
+//                showChar(digthree+48, pos4);
+//            }
+//        }
+//
+//        FT_ONE = digone + digtwo*10 + digthree*100;
+//
+//        if (FT_ONE < 3) {
+//            FT_ONE = 3;
+//        } else if (FT_ONE > 400) {
+//            FT_ONE = 400;
+//        }
+//
+//        mode = 0;
+//        digone = 0;
+//        digtwo = 0;
+//        digthree = 0;
+//        entone = 0;
+//        enttwo = 0;
+//        entthree = 0;
+//        entfour = 0;
+//
+//        while (!mode) {
+//            if (entone == 0) {
+//                displayScrollText("SET FT2");
+//                entone = 1;
+//            } else if (enttwo == 0) {
+//                showChar(digone+48, pos6);
+//            } else if (entthree == 0) {
+//                showChar(digtwo+48, pos5);
+//            } else if (entfour == 0) {
+//                showChar(digthree+48, pos4);
+//            }
+//        }
+//
+//        FT_TWO = digone + digtwo*10 + digthree*100;
+//
+//        if (FT_TWO < 3) {
+//            FT_TWO = 3;
+//        } else if (FT_TWO > 400) {
+//            FT_TWO = 400;
+//        }
+//
+//        mode = 0;
+//        digone = 0;
+//        digtwo = 0;
+//        digthree = 0;
+//        entone = 0;
+//        enttwo = 0;
+//        entthree = 0;
+//        entfour = 0;
+//
+//        while (!mode) {
+//            if (entone == 0) {
+//                displayScrollText("SET BT1");
+//                entone = 1;
+//            } else if (enttwo == 0) {
+//                showChar(digone+48, pos6);
+//            } else if (entthree == 0) {
+//                showChar(digtwo+48, pos5);
+//            } else if (entfour == 0) {
+//                showChar(digthree+48, pos4);
+//            }
+//        }
+//
+//        BT_ONE = digone + digtwo*10 + digthree*100;
+//
+//        if (BT_ONE < 3) {
+//            BT_ONE = 3;
+//        } else if (BT_ONE > 400) {
+//            BT_ONE = 400;
+//        }
+//
+//        mode = 0;
+//        digone = 0;
+//        digtwo = 0;
+//        digthree = 0;
+//        entone = 0;
+//        enttwo = 0;
+//        entthree = 0;
+//        entfour = 0;
+//
+//        while (!mode) {
+//            if (entone == 0) {
+//                displayScrollText("SET BT2");
+//                entone = 1;
+//            } else if (enttwo == 0) {
+//                showChar(digone+48, pos6);
+//            } else if (entthree == 0) {
+//                showChar(digtwo+48, pos5);
+//            } else if (entfour == 0) {
+//                showChar(digthree+48, pos4);
+//            }
+//        }
+//
+//        BT_TWO = digone + digtwo*10 + digthree*100;
+//
+//        if (BT_TWO < 3) {
+//            BT_TWO = 3;
+//        } else if (BT_TWO > 400) {
+//            BT_TWO = 400;
+//        }
+//
+//        mode = 0;
+//        digone = 0;
+//        digtwo = 0;
+//        digthree = 0;
+//        entone = 0;
+//        enttwo = 0;
+//        entthree = 0;
+//        entfour = 0;
+//
+//        while (!mode) {
+//            if (entone == 0) {
+//                displayScrollText("SET BT3");
+//                entone = 1;
+//            } else if (enttwo == 0) {
+//                showChar(digone+48, pos6);
+//            } else if (entthree == 0) {
+//                showChar(digtwo+48, pos5);
+//            } else if (entfour == 0) {
+//                showChar(digthree+48, pos4);
+//            }
+//        }
+//
+//        BT_THREE = digone + digtwo*10 + digthree*100;
+//
+//        if (BT_THREE < 3) {
+//            BT_THREE = 3;
+//        } else if (BT_THREE > 400) {
+//            BT_THREE = 400;
+//        }
+//
+//        if (FT_TWO >= FT_ONE) {
+//            FT_ONE = 100;
+//            FT_TWO = 50;
+//        }
+//
+//        if (BT_THREE >= BT_TWO || BT_TWO >= BT_ONE || BT_THREE >= BT_ONE) {
+//            BT_ONE = 300;
+//            BT_TWO = 200;
+//            BT_ONE = 10;
+//        }
     }
 
     displayScrollText("SENSOR");
@@ -327,22 +327,19 @@ void main(void) {
             distance_cm = 400;
         }
 
-        sprintf(x, "%d", distance_cm);
+        int i = 0;
+        int number = distance_cm;
+        while (number != 0) {
+            x[i] = number % 10;
+            number /= 10;
+            i++;
+        }
 
         if(ForB == 0) {
             showChar('F', pos1);
-
-//            displayScrollText(x);
-            if (distance_cm < 10) {
-                showChar(x[0]+48, pos6);
-            } else if (distance_cm < 100) {
-                showChar(x[0]+48, pos5);
-                showChar(x[1]+48, pos6);
-            } else {
-                showChar(x[0]+48, pos4);
-                showChar(x[1]+48, pos5);
-                showChar(x[2]+48, pos6);
-            }
+            showChar(x[0]+48, pos6);
+            showChar(x[1]+48, pos5);
+            showChar(x[2]+48, pos4);
         }
 
         if (distance_cm < FT_TWO) {
@@ -409,22 +406,19 @@ void main(void) {
             distance_cmb = 400;
         }
 
-        sprintf(x, "%d", distance_cmb);
+        i = 0;
+        number = distance_cmb;
+        while (number != 0) {
+            x[i] = number % 10;
+            number /= 10;
+            i++;
+        }
 
         if(ForB == 1) {
             showChar('B', pos1);
-
-//            displayScrollText(x);
-            if (distance_cmb < 10) {
-                showChar(x[0]+48, pos6);
-            } else if (distance_cmb < 100) {
-                showChar(x[0]+48, pos5);
-                showChar(x[1]+48, pos6);
-            } else {
-                showChar(x[0]+48, pos4);
-                showChar(x[1]+48, pos5);
-                showChar(x[2]+48, pos6);
-            }
+            showChar(x[0]+48, pos6);
+            showChar(x[1]+48, pos5);
+            showChar(x[2]+48, pos4);
         }
 
         if (distance_cmb < BT_THREE) {
@@ -734,7 +728,9 @@ void SW1(void) {
 
     if (!mode) {
         //displayScrollText("SW1");
-        if (enttwo == 0) {
+        if (entone == 0) {
+
+        } else if (enttwo == 0) {
             digone++;
             if (digone > 9) {
                 digone = 0;
