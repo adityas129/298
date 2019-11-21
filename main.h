@@ -39,13 +39,13 @@
 #define GREEN_PORT         GPIO_PORT_P1
 #define GREEN_PIN          GPIO_PIN6
 
-//Orange LED
-#define ORANGE_PORT         GPIO_PORT_P5
-#define ORANGE_PIN          GPIO_PIN0
-
 //Yellow LED
 #define YELLOW_PORT         GPIO_PORT_P5
-#define YELLOW_PIN          GPIO_PIN3
+#define YELLOW_PIN          GPIO_PIN0
+
+//Orange LED
+#define ORANGE_PORT         GPIO_PORT_P5
+#define ORANGE_PIN          GPIO_PIN3
 
 //Red LED
 #define RED_PORT         GPIO_PORT_P1
@@ -53,19 +53,13 @@
 
 void Init_GPIO(void);
 void Init_Clock(void);
-void Init_UART(void);
 void Init_SW_IRQ(void);
-
 void Init_PWM(void);
 void Init_PWM2(int period, int hc);
-void Init_ADC(void);
 
 Timer_A_outputPWMParam param; //Timer configuration data structure for PWM
 Timer_A_initContinuousModeParam param2; //Timer configuration data structure for continuous mode
 Timer_A_initCaptureModeParam param3; //Timer configuration data structure for continuous mode
-
-//Timer_A_initCaptureMode param3;
-
 Timer_A_outputPWMParam param; //Timer configuration data structure for PWM
 
-#endif /* MAIN_H_ */
+#endif
