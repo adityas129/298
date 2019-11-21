@@ -10,6 +10,9 @@ int distance_cmb[3] = {0};
 
 int mode = 0;
 int ForB = 0;
+int increment = 0;
+int enter = 0;
+int change = 0;
 
 int digone = 0;
 int digtwo = 0;
@@ -41,6 +44,12 @@ void main(void) {
 
     Setup:
     {
+        //Turn off all LEDs
+        GPIO_setOutputLowOnPin(GREEN_PORT, GREEN_PIN);
+        GPIO_setOutputLowOnPin(YELLOW_PORT, YELLOW_PIN);
+        GPIO_setOutputLowOnPin(ORANGE_PORT, ORANGE_PIN);
+        GPIO_setOutputLowOnPin(RED_PORT, RED_PIN);
+
         mode = 0;
         digone = 0;
         digtwo = 0;
@@ -77,10 +86,42 @@ void main(void) {
                 displayScrollText("SET FT1");
                 entone = 1;
             } else if (enttwo == 0) {
+                if (increment) {
+                    digone++;
+                    if (digone > 9) {
+                        digone = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    enttwo = 1;
+                    enter = 0;
+                }
                 showChar(digone+48, pos6);
             } else if (entthree == 0) {
+                if (increment) {
+                    digtwo++;
+                    if (digtwo > 9) {
+                        digtwo = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entthree = 1;
+                    enter = 0;
+                }
                 showChar(digtwo+48, pos5);
             } else if (entfour == 0) {
+                if (increment) {
+                    digthree++;
+                    if (digthree > 9) {
+                        digthree = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entfour = 1;
+                    enter = 0;
+                    mode = 1;
+                }
+
                 showChar(digthree+48, pos4);
             }
         }
@@ -107,10 +148,41 @@ void main(void) {
                 displayScrollText("SET FT2");
                 entone = 1;
             } else if (enttwo == 0) {
+                if (increment) {
+                    digone++;
+                    if (digone > 9) {
+                        digone = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    enttwo = 1;
+                    enter = 0;
+                }
                 showChar(digone+48, pos6);
             } else if (entthree == 0) {
+                if (increment) {
+                    digtwo++;
+                    if (digtwo > 9) {
+                        digtwo = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entthree = 1;
+                    enter = 0;
+                }
                 showChar(digtwo+48, pos5);
             } else if (entfour == 0) {
+                if (increment) {
+                    digthree++;
+                    if (digthree > 9) {
+                        digthree = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entfour = 1;
+                    enter = 0;
+                    mode = 1;
+                }
                 showChar(digthree+48, pos4);
             }
         }
@@ -137,10 +209,41 @@ void main(void) {
                 displayScrollText("SET BT1");
                 entone = 1;
             } else if (enttwo == 0) {
+                if (increment) {
+                    digone++;
+                    if (digone > 9) {
+                        digone = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    enttwo = 1;
+                    enter = 0;
+                }
                 showChar(digone+48, pos6);
             } else if (entthree == 0) {
+                if (increment) {
+                    digtwo++;
+                    if (digtwo > 9) {
+                        digtwo = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entthree = 1;
+                    enter = 0;
+                }
                 showChar(digtwo+48, pos5);
             } else if (entfour == 0) {
+                if (increment) {
+                    digthree++;
+                    if (digthree > 9) {
+                        digthree = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entfour = 1;
+                    enter = 0;
+                    mode = 1;
+                }
                 showChar(digthree+48, pos4);
             }
         }
@@ -167,10 +270,42 @@ void main(void) {
                 displayScrollText("SET BT2");
                 entone = 1;
             } else if (enttwo == 0) {
+                if (increment) {
+                    digone++;
+                    if (digone > 9) {
+                        digone = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    enttwo = 1;
+                    enter = 0;
+                }
                 showChar(digone+48, pos6);
             } else if (entthree == 0) {
+                if (increment) {
+                    digtwo++;
+                    if (digtwo > 9) {
+                        digtwo = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entthree = 1;
+                    enter = 0;
+                }
                 showChar(digtwo+48, pos5);
             } else if (entfour == 0) {
+                if (increment) {
+                    digthree++;
+                    if (digthree > 9) {
+                        digthree = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entfour = 1;
+                    enter = 0;
+                    mode = 1;
+                }
+
                 showChar(digthree+48, pos4);
             }
         }
@@ -197,10 +332,42 @@ void main(void) {
                 displayScrollText("SET BT3");
                 entone = 1;
             } else if (enttwo == 0) {
+                if (increment) {
+                    digone++;
+                    if (digone > 9) {
+                        digone = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    enttwo = 1;
+                    enter = 0;
+                }
                 showChar(digone+48, pos6);
             } else if (entthree == 0) {
+                if (increment) {
+                    digtwo++;
+                    if (digtwo > 9) {
+                        digtwo = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entthree = 1;
+                    enter = 0;
+                }
                 showChar(digtwo+48, pos5);
             } else if (entfour == 0) {
+                if (increment) {
+                    digthree++;
+                    if (digthree > 9) {
+                        digthree = 0;
+                    }
+                    increment = 0;
+                } else if (enter) {
+                    entfour = 1;
+                    enter = 0;
+                    mode = 1;
+                }
+
                 showChar(digthree+48, pos4);
             }
         }
@@ -259,6 +426,13 @@ void main(void) {
         while(1) {
             if (!mode) {
                 goto Setup;
+            } else if (change) {
+                if (ForB == 0) {
+                    ForB = 1;
+                } else {
+                    ForB = 0;
+                }
+                change = 0;
             }
             Timer_A_clear(TIMER_A1_BASE);
     //
@@ -577,31 +751,14 @@ void SW1(void) {
             entzero = 1;
         } else if (entone == 0) {
 
-        } else if (enttwo == 0) {
-            digone++;
-            if (digone > 9) {
-                digone = 0;
-            }
-        } else if (entthree == 0) {
-            digtwo++;
-            if (digtwo > 9) {
-                digtwo = 0;
-            }
-        } else if (entfour == 0) {
-            digthree++;
-            if (digthree > 9) {
-                digthree = 0;
-            }
+        } else  {
+            increment = 1;
         }
     } else {
-        if (ForB == 0) {
-            ForB = 1;
-        } else {
-            ForB = 0;
-        }
+        change = 1;
     }
 
-    _delay_cycles(200000);
+    _delay_cycles(300000);
     __enable_interrupt();
 }
 
@@ -617,14 +774,9 @@ void SW2(void) {
         if (entzero == 0) {
             entzero = -1;
         } else if (entone == 0) {
-            entone = 1;
-        } else if (enttwo == 0) {
-            enttwo = 1;
-        } else if (entthree == 0) {
-            entthree = 1;
-        } else if (entfour == 0) {
-            entfour = 1;
-            mode = 1;
+
+        } else {
+            enter = 1;
         }
     } else {
         mode = 0;
@@ -637,6 +789,6 @@ void SW2(void) {
         entfour = 0;
     }
 
-    _delay_cycles(200000);
+    _delay_cycles(300000);
     __enable_interrupt();
 }
