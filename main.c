@@ -26,8 +26,8 @@ int enttwo = 0;
 int entthree = 0;
 int entfour = 0;
 
-int FT_ONE = 200;
-int FT_TWO = 100;
+int FT_ONE = 100;
+int FT_TWO = 50;
 int BT_ONE = 300;
 int BT_TWO = 200;
 int BT_THREE = 100;
@@ -117,160 +117,164 @@ void main(void) {
 
     Setup:
     {
-//        displayScrollText("SETUP MODE");
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET FT1");
-//                entone = 1;
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        FT_ONE = digone + digtwo*10 + digthree*100;
-//
-//        if (FT_ONE < 3) {
-//            FT_ONE = 3;
-//        } else if (FT_ONE > 400) {
-//            FT_ONE = 400;
-//        }
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET FT2");
-//                entone = 1;
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        FT_TWO = digone + digtwo*10 + digthree*100;
-//
-//        if (FT_TWO < 3) {
-//            FT_TWO = 3;
-//        } else if (FT_TWO > 400) {
-//            FT_TWO = 400;
-//        }
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET BT1");
-//                entone = 1;
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        BT_ONE = digone + digtwo*10 + digthree*100;
-//
-//        if (BT_ONE < 3) {
-//            BT_ONE = 3;
-//        } else if (BT_ONE > 400) {
-//            BT_ONE = 400;
-//        }
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET BT2");
-//                entone = 1;
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        BT_TWO = digone + digtwo*10 + digthree*100;
-//
-//        if (BT_TWO < 3) {
-//            BT_TWO = 3;
-//        } else if (BT_TWO > 400) {
-//            BT_TWO = 400;
-//        }
-//
-//        mode = 0;
-//        digone = 0;
-//        digtwo = 0;
-//        digthree = 0;
-//        entone = 0;
-//        enttwo = 0;
-//        entthree = 0;
-//        entfour = 0;
-//
-//        while (!mode) {
-//            if (entone == 0) {
-//                displayScrollText("SET BT3");
-//                entone = 1;
-//            } else if (enttwo == 0) {
-//                showChar(digone+48, pos6);
-//            } else if (entthree == 0) {
-//                showChar(digtwo+48, pos5);
-//            } else if (entfour == 0) {
-//                showChar(digthree+48, pos4);
-//            }
-//        }
-//
-//        BT_THREE = digone + digtwo*10 + digthree*100;
-//
-//        if (BT_THREE < 3) {
-//            BT_THREE = 3;
-//        } else if (BT_THREE > 400) {
-//            BT_THREE = 400;
-//        }
-//
-//        if (FT_TWO >= FT_ONE) {
-//            FT_ONE = 200;
-//            FT_TWO = 100;
-//        }
-//
-//        if (BT_THREE >= BT_TWO || BT_TWO >= BT_ONE || BT_THREE >= BT_ONE) {
-//            BT_ONE = 300;
-//            BT_TWO = 200;
-//            BT_ONE = 100;
-//        }
+        displayScrollText("SETUP MODE");
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET FT1");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        FT_ONE = digone + digtwo*10 + digthree*100;
+
+        if (FT_ONE < 3) {
+            FT_ONE = 3;
+        } else if (FT_ONE > 400) {
+            FT_ONE = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET FT2");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        FT_TWO = digone + digtwo*10 + digthree*100;
+
+        if (FT_TWO < 3) {
+            FT_TWO = 3;
+        } else if (FT_TWO > 400) {
+            FT_TWO = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET BT1");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        BT_ONE = digone + digtwo*10 + digthree*100;
+
+        if (BT_ONE < 3) {
+            BT_ONE = 3;
+        } else if (BT_ONE > 400) {
+            BT_ONE = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET BT2");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        BT_TWO = digone + digtwo*10 + digthree*100;
+
+        if (BT_TWO < 3) {
+            BT_TWO = 3;
+        } else if (BT_TWO > 400) {
+            BT_TWO = 400;
+        }
+
+        mode = 0;
+        digone = 0;
+        digtwo = 0;
+        digthree = 0;
+        entone = 0;
+        enttwo = 0;
+        entthree = 0;
+        entfour = 0;
+
+        while (!mode) {
+            if (entone == 0) {
+                displayScrollText("SET BT3");
+                entone = 1;
+            } else if (enttwo == 0) {
+                showChar(digone+48, pos6);
+            } else if (entthree == 0) {
+                showChar(digtwo+48, pos5);
+            } else if (entfour == 0) {
+                showChar(digthree+48, pos4);
+            }
+        }
+
+        BT_THREE = digone + digtwo*10 + digthree*100;
+
+        if (BT_THREE < 3) {
+            BT_THREE = 3;
+        } else if (BT_THREE > 400) {
+            BT_THREE = 400;
+        }
+
+        if (FT_TWO >= FT_ONE) {
+            FT_ONE = 100;
+            FT_TWO = 50;
+        }
+
+        if (BT_THREE >= BT_TWO || BT_TWO >= BT_ONE || BT_THREE >= BT_ONE) {
+            BT_ONE = 300;
+            BT_TWO = 200;
+            BT_ONE = 100;
+        }
     }
+
+
+
+
 
     displayScrollText("USER MODE");
 
@@ -293,9 +297,14 @@ void main(void) {
     int number = 400;
     int average = 400;
     int i = 0;
+
     char x[3] = {0};
     mode = 1;
+    int no_beep = 1;
+    int double_beep = 0;
+
     Timer_A_initContinuousMode(TIMER_A1_BASE, &param2);
+
     while(1) {
 //        displayScrollText("START");
         if (!mode) {
@@ -360,7 +369,10 @@ void main(void) {
             }
         }
 
-        if (average <= FT_TWO) {
+        if (average <= FT_TWO && (no_beep || double_beep)) { //QUAD BEEP FOR CLOSEST THRESHOLD
+            no_beep = 0;
+            double_beep = 0;
+
             Init_PWM2(200, 100); //Set period and high count
 
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
@@ -381,7 +393,10 @@ void main(void) {
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
             _delay_cycles(100000);
             Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
-        } else if (average <= FT_ONE) {
+        } else if (average <= FT_ONE && no_beep) { //DOUBLE BEEP MIDDLE THRESHOLD
+            double_beep = 1;
+            no_beep = 0;
+
             Init_PWM2(300, 150); //Set period and high count
 
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
@@ -392,7 +407,13 @@ void main(void) {
             Timer_A_outputPWM(TIMER_A0_BASE, &param);   //Turn on PWM
             _delay_cycles(200000);
             Timer_A_stop(TIMER_A0_BASE);    //Shut off PWM signal
+        } else if (average > FT_ONE) {
+            no_beep = 1;
+            double_beep = 0;
+        } else if (average > FT_TWO) {
+            double_beep = 1;
         }
+
         __delay_cycles(170000);
 
         fcount++;
